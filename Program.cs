@@ -16,7 +16,7 @@ namespace Rap_Finands
         public static string reginummer = "4242";
         public static string datafil = "bank.json"; //Her ligger alt data i
         public static List<Konto> konti;
-        public static float belob;
+        public static float beløb; //Fixed belob to beløb
         static void Main(string[] args)
         {
             Console.WriteLine("Henter alt kontodata");
@@ -54,9 +54,9 @@ namespace Rap_Finands
                 Console.WriteLine("0. Afslut");
 
                 Console.Write(">");
-                if (int.TryParse(Console.ReadLine(), out int valg))
+                if (int.TryParse(Console.ReadLine(), out int valg)) //Made type-safe
                 {
-                    switch (valg)
+                    switch (valg)  //Removed -1
                     {
                         case 1:
                             dos_opretKonto();
@@ -100,7 +100,7 @@ namespace Rap_Finands
         }
         static void dos_opretTransaktion(Konto k)
         {
-            if (k != null)
+            if (k != null) //Checks if if the Konto is valid
             {
                 Console.Write("Tekst: ");
                 string tekst = Console.ReadLine();
@@ -121,7 +121,7 @@ namespace Rap_Finands
 
                 }
             }
-            else
+            else //if the konto is not valid repeat the method
             {
                 dos_opretTransaktion(dos_findKonto());
             }
@@ -185,7 +185,7 @@ namespace Rap_Finands
             if (saldo + beløb < 0) return false;
             var t = new Transaktion();
             t.tekst = tekst;
-            t.amount = belob;
+            t.amount = beløb; //Fixed belob to beløb
             t.saldo = t.amount + saldo;
             t.dato = DateTime.Now;
 
